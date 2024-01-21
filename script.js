@@ -268,9 +268,17 @@ nextBtn.addEventListener("click", function () {
 });
 
 const pageHandler = function (e) {
-  const page = e.target.innerHTML;
+  const page = Number(e.target.innerHTML);
+  pageNumber = page;
+  console.log(page);
   repository.style.opacity = 0;
-  prevBtn.disabled = false;
-  nextBtn.disabled = false;
+  if (pageNumber === 1) {
+    prevBtn.disabled = true;
+  } else if (pageNumber === totalPages) {
+    nextBtn.disabled = true;
+  } else {
+    prevBtn.disabled = false;
+    nextBtn.disabled = false;
+  }
   getUserRepo(userName, page);
 };
