@@ -270,5 +270,7 @@ nextBtn.addEventListener("click", function () {
 const pageHandler = function (e) {
   const page = e.target.innerHTML;
   repository.style.opacity = 0;
+  prevBtn.disabled = false;
+  nextBtn.disabled = false;
   getUserRepo(userName, page);
 };
