@@ -11,9 +11,6 @@ const spinnerUser = document.querySelector(".spinnerUser");
 const spinnerRepo = document.querySelector(".spinnerRepo");
 const parent = document.querySelector(".parent");
 
-const formRepo = document.querySelector(".form-repo");
-const formRepoinput = document.querySelector(".form-repo .input");
-
 let pageButtons;
 let userName = "";
 let pageNumber = 1;
@@ -94,20 +91,6 @@ const getUserRepo = async function (userName, pageNumber = 1) {
   }
 };
 
-////////////////////////////////////////////////////////////////////////////
-// const getRepoByName = async function (repoName) {
-//   try {
-//     const fetchRepo = fetch(`git://github.com/johnpapa/${repoName}.git`);
-//     const res = await fetchRepo;
-//     const data = res.json();
-//     if (res.ok) {
-//       console.log(data);
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 //////////////////////////////////////////////////////////////////////////
 const displayError = function (error) {
   let el = document.querySelector(".error-user");
@@ -156,7 +139,7 @@ const updateRepository = function (repoData) {
 
   repoData.forEach((data) => {
     const html = `
-    <div class="card">
+    <a class="card" href=${data.html_url} target=_blank>
     <h2>${data.name}</h2>
     <p>${data.description || "No description available"}</p>
     <div class="topic">
@@ -166,7 +149,7 @@ const updateRepository = function (repoData) {
         : "no topics available"
     }
     </div>
-  </div>
+  </a>
 
     `;
     repoContainer.insertAdjacentHTML("afterbegin", html);
@@ -209,7 +192,6 @@ form.addEventListener("submit", async (e) => {
   spinnerUser.style.display = "flex";
   profile.style.opacity = 0;
   repository.style.opacity = 0;
-  formRepo.style.opacity = 1;
 
   if (userName) {
     try {
@@ -223,26 +205,8 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-// formRepo.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   const repoName = formRepoinput.value;
-//   getRepoByName(repoName);
-// });
-
 //////////////////////////////////////////////////////////////////////
 // next and prev buttons
-
-// const buttonCtrl = function () {
-//   if (pageNumber === 1) {
-//     prevBtn.disabled = true;
-//   } else if (pageNumber === totalPages) {
-//     nextBtn.disabled = true;
-//   } else {
-//     prevBtn.disabled = false;
-//     nextBtn.disabled = false;
-//   }
-//   getUserRepo(userName, pageNumber);
-// };
 
 prevBtn.addEventListener("click", () => {
   pageNumber--;
@@ -252,7 +216,6 @@ prevBtn.addEventListener("click", () => {
   }
   nextBtn.disabled = false;
   getUserRepo(userName, pageNumber);
-  // buttonCtrl();
 });
 
 nextBtn.addEventListener("click", function () {
@@ -263,8 +226,6 @@ nextBtn.addEventListener("click", function () {
   }
   prevBtn.disabled = false;
   getUserRepo(userName, pageNumber);
-
-  // buttonCtrl();
 });
 
 const pageHandler = function (e) {

@@ -89,6 +89,8 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 10px;
   gap: 20px;
+  text-decoration: none;
+  color: black;
 
   h2 {
     font-weight: bold;
@@ -154,10 +156,6 @@
 .error-repo {
   display: block;
   width: 100%;
-}
-
-.form-repo {
-  opacity: 0;
 }
 
 .lds-ring {
