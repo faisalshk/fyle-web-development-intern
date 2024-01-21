@@ -274,8 +274,10 @@ const pageHandler = function (e) {
   repository.style.opacity = 0;
   if (pageNumber === 1) {
     prevBtn.disabled = true;
+    nextBtn.disabled = false;
   } else if (pageNumber === totalPages) {
     nextBtn.disabled = true;
+    prevBtn.disabled = false;
   } else {
     prevBtn.disabled = false;
     nextBtn.disabled = false;
